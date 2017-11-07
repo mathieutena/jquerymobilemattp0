@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            Exemple indexdb storage
+        </title>
+        <script src="js/modernizr-custom.js"></script>
+        <script type="text/javascript">
+        Modernizr.on('indexeddb', function(result) {
+            if (result) {
+              // supported
+              console.log("indexdb supporté");
+              var request= indexedDB.open("librairie");
+              request.onupgradeneeded= function() {
+                  //la bdd n'existe pas et a été créé
+                  var db=request.result;
+                  var store = db.createObjectStore("livres",{keyPath:"isbn"});
+                  store.put({
+                      titre: "Ma vie mon oeuvre",
+                      auteur: "Seguin",
+                      isbn:10
+                  });
+                  store.put({
+                      titre: "Ma vie mon oeuvre 2",
+                      auteur: "Seguin",
+                      isbn:20
+                  });
+
+
+              }
+
+              request.onsuccess =function() {
+                  //onsuccess
+                  var db=request.result;
+                  var transaction=db.transaction(["livres"]);
+                  var objectStore=transaction.objectStore("livres");
+                  var res=objectStore.get(20);
+                  res.onerror=function()
+                  {
+                    console.log(event);
+                  }
+                  res.onsuccess=function(){
+                      console.log(event);
+                  }
+              }
+
+            } else {
+              // not-supported
+              console.log("indexdb non supporté");
+            }
+        });
+        </script>
+    </head>
+    <body >
+        <p>Balise de type block</p>
+        <p>2eme paragraphe</p>
+    </body>
+</html>

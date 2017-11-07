@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+        <script src="libs/jquery.mobile-1.4.5.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="libs/jquery.mobile-1.4.5.css"/> 
+        <script type="text/javascript">
+        function getData(){
+            $.ajax({
+                url:"http://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V2/home.json" 
+                }).done(function(result) {
+                    $("#lequipe").empty();
+                   for(var i=0;i<result.articles.length;i++)
+                   {
+                    $("#lequipe").append("<li><h2>"+result.articles[i].titre+"</h2><p>"+result.articles[i].texte+"</p></li>");
+                   }
+                   $("#lequipe").listview('refresh');
+                });
+                
+
+        }
+        </script>
+
+    </head>
+    <body onload="getData()">
+           
+             
+        <section data-role="page" data-theme="a" id="page1" > 
+            <aside data-role="panel" id="mypanel" data-position="left" data-display="overlay" >
+                    <p>Panel</p>
+            </aside>
+            <aside data-role="panel" id="mypanel2" data-position="right" data-display="push">
+                    <a href="#page1" data-role="button" data-inline="true" data-rel="close" >Close</a>
+                    <p>Panel</p>
+            </aside>
+            <header data-role="header"  data-position="fixed" data-theme="b" data-back-btn-text="Retour" data-add-back-btn="true">
+               <h1>Accueil</h1> 
+            </header>
+            <article data-role="content">
+                    <ul data-role="listview" data-inset="true" id=lequipe>
+                           
+                    </ul>                
+                <p><a href="#mypanel">Afficher le panneau</a></p>
+                <p><a href="#mypanel2">Afficher le panneau à droite</a></p>
+                <p><a href="#confirmation">Afficher la modale</a></p>
+                <p><a href="#popupBasic" data-rel="popup" >Open Popup</a></p>
+                <div data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                    <a href="#page2" data-role="button" data-theme="a" > themea</a>
+                    <a href="#page2" data-role="button" data-theme="b" > themeb mini</a>
+                    <a href="#page2" data-role="button" data-theme="c" > themec</a>
+                </div>
+                
+            </article>
+            <footer data-role="footer"  data-position="fixed" data-id="foot">
+                <nav data-role="navbar">
+                    <ul>
+                            <li><a href="#page2" data-icon="arrow-r">Page2</a></li>
+                            <li><a href="#page2" data-icon="info">info</a></li>
+                            <li><a href="#page2" data-icon="home">home</a></li>
+                            <li><a href="#page2" data-icon="search">search</a></li>
+                            <li><a href="#page2" data-icon="alert">alert</a></li>
+                    </ul>
+                </nav>                      
+            </footer>
+            <div data-role="popup" id="popupBasic" data-position-to="window">
+                    <p>This is a completely basic popup, no options set.<p>
+                        <a href="#" data-rel="back" data-icon="delete" data-iconpos="notext"
+                        data-role="button" class="ui-btn-right">Fermer</a>
+            </div>  
+        </section>
+
+        <section data-role="dialog" id="confirmation">
+                <header data-role="header" data-theme="b">
+                        <h1>Dialog</h1>
+                </header>
+                <article data-role="content">
+                    <p>Merci</p>
+                </article>
+        </section>
+
+        
+
+        <section data-role="page" data-theme="a" id="page2">
+                <header data-role="header" data-fullscreen="true" data-position="fixed" data-theme="b" data-add-back-btn="true">
+                    <h1>Data icon</h1>
+                    <a href="#page2" class="ui-btn-right">page2</a>
+                </header>
+                <article data-role="content">
+                    <p>Icon</p>
+                    <a href="#page2" data-role="button" data-transition="turn" > turn</a>
+                    <a href="#page2" data-role="button" data-transition="slide" > slide</a>
+                    <a href="#page2" data-role="button" data-transition="pop" > pop</a>
+                    <a href="#page2"  data-role="button" data-transition="flip">flip</a>
+                    <a href="#page2" data-role="button" data-transition="slide" data-corners="false" > corner</a>
+                    <a href="#page2" data-role="button" data-shadow="false" > shadow</a>
+                    <a href="#page2" data-role="button" data-inline="true" >inline</a>
+                    <a href="#page1" data-role="button" data-icon="arrow-r" > icon</a>
+                    <a href="#page1" data-role="button" data-icon="info" > icon info</a>
+                    <a href="#page1" data-role="button" data-icon="home" > icon home</a>
+                    <a href="#page1" data-role="button" data-icon="search" > icon search</a>
+                    <a href="#page1" data-role="button" data-icon="alert" > icon alert</a>
+                    <a href="#page1" data-role="button" data-icon="star" > icon star</a>
+                    <a href="#page1" data-role="button" data-iconpos="notext" data-icon="star" > icon star</a>
+                    <a href="#page1" data-role="button" data-icon="arrow-r" data-iconpos="right" > icon right</a>
+                </article>
+                <footer data-role="footer"  data-position="fixed" data-id="foot">
+                        <nav data-role="navbar">
+                            <ul>
+                                <li><a href="#page2" data-icon="arrow-r">Page2</a></li>
+                                <li><a href="#page2" data-icon="arrow-r">Page2</a></li>
+                                <li><a href="#page2" data-icon="arrow-r">Page2</a></li>
+                                <li><a href="#page2" data-icon="arrow-r">Page2</a></li>
+                                <li><a href="#page2" data-icon="arrow-r">Page2</a></li>
+        
+                            </ul>
+        
+                        </nav>
+                                               
+                    </footer>
+        </section>
+
+        
+    </body>
+
+</html>
